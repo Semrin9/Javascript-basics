@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup Form</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Signup Form</h1>
+  <form id="signupForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <span id="passwordError" class="error"></span><br>
+
+    <input type="submit" value="Signup">
+  </form>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+
+      const password = passwordInput.value;
+
+      const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*_-])(?=.*[^\s]).{10,}$/;
+
+      if (!passwordRegex.test(password)) {
+        const passwordError = document.getElementById('passwordError');
+        passwordError.textContent = 'Password should have a minimum length of 10, at least one uppercase letter,one lowercase letter, one digit, and one symbol.';
+      } else {
+        alert('Signup successful');
+
+        const passwordError = document.getElementById('passwordError');
+        passwordError.textContent = '';
+        usernameInput.value = '';
+        passwordInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
